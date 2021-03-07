@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui.learning
 
 import androidx.compose.animation.AnimatedVisibility
@@ -42,17 +57,16 @@ fun PoshteView(time: Int) {
             .fillMaxHeight()
     ) {
 
-
         val prev = if (time == 0) {
             0
         } else {
             time - 1
         }
 
-
         var visible by remember { mutableStateOf(true) }
 
-        Text("ShowHide - $visible",
+        Text(
+            "ShowHide - $visible",
             Modifier
                 .background(Color.Blue)
                 .fillMaxWidth()
@@ -60,16 +74,16 @@ fun PoshteView(time: Int) {
                     visible = !visible
                 }
                 .width(200.dp)
-                .height(50.dp))
-
+                .height(50.dp)
+        )
 
         AnimatedVisibility(
             visible = visible,
             enter = slideInVertically(
                 animationSpec = tween(durationMillis = 1000, easing = FastOutSlowInEasing)
-            )
-                    + expandVertically(expandFrom = Alignment.Bottom)
-                    + fadeIn(initialAlpha = 0.1f),
+            ) +
+                expandVertically(expandFrom = Alignment.Bottom) +
+                fadeIn(initialAlpha = 0.1f),
             exit = slideOutVertically(
                 //  animationSpec = tween(durationMillis = 1000, easing = FastOutSlowInEasing)
             ) + shrinkVertically(
@@ -77,7 +91,7 @@ fun PoshteView(time: Int) {
                 // animationSpec = tween(durationMillis = 1000, easing = FastOutSlowInEasing)
             ) + fadeOut(),
 
-            ) {
+        ) {
             Text(
                 prev.toString(),
                 Modifier
@@ -96,7 +110,7 @@ fun PoshteView(time: Int) {
             ) + fadeIn(initialAlpha = 0.3f),
             exit = slideOutVertically() + shrinkVertically() + fadeOut(),
 
-            ) {
+        ) {
             Text(
                 time.toString(),
                 Modifier
@@ -105,11 +119,8 @@ fun PoshteView(time: Int) {
                     .height(200.dp)
             )
         }
-
-
     }
 }
-
 
 @ExperimentalAnimationApi
 @Preview("Light Theme", widthDp = 360, heightDp = 640)

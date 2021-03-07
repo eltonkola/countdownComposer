@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui.learning
 
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -69,7 +84,6 @@ private fun updateTransitionData(boxState: BoxState6): TransitionData6 {
     return remember(transition) { TransitionData6(color, size) }
 }
 
-
 @ExperimentalAnimationApi
 @Composable
 fun DemoScreen6() {
@@ -83,7 +97,8 @@ fun DemoScreen6() {
 
         var currentState by remember { mutableStateOf(BoxState6.Collapsed) }
 
-        Text("ShowHide",
+        Text(
+            "ShowHide",
             Modifier
                 .background(Color.Blue)
                 .fillMaxWidth()
@@ -94,18 +109,14 @@ fun DemoScreen6() {
                     } else {
                         currentState = BoxState6.Expanded
                     }
-
-
                 }
                 .width(200.dp)
-                .height(50.dp))
+                .height(50.dp)
+        )
 
         AnimatingBox(boxState = currentState)
-
-
     }
 }
-
 
 @ExperimentalAnimationApi
 @Preview("Light Theme", widthDp = 360, heightDp = 640)

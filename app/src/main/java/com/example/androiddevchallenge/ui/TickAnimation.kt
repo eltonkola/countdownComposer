@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -33,7 +48,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 
 enum class TickState(val value: Int) {
     ZERO(0), ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5),
@@ -73,7 +87,6 @@ private class TickTransitionData(
     val rotationX9 by rotationX9
 }
 
-
 @Composable
 fun SingleTickBox(number: String, rotationX: Float, visible: Boolean) {
     Box(
@@ -94,7 +107,8 @@ fun SingleTickBox(number: String, rotationX: Float, visible: Boolean) {
         Box(
             Modifier
                 .fillMaxSize()
-                .background(Color.Black.copy(0.6f))) {}
+                .background(Color.Black.copy(0.6f))
+        ) {}
         Text(
             text = number,
             fontSize = 26.sp,
@@ -102,7 +116,6 @@ fun SingleTickBox(number: String, rotationX: Float, visible: Boolean) {
             color = Color.White,
         )
     }
-
 }
 
 @Composable
@@ -125,7 +138,6 @@ fun TickBox(boxState: TickState) {
 fun shouldShow(value: Int, current: Int): Boolean {
     return value == current + 1 || value == current - 1
 }
-
 
 @Composable
 private fun updateTransitionData(boxState: TickState): TickTransitionData {
@@ -233,7 +245,6 @@ private fun updateTransitionData(boxState: TickState): TickTransitionData {
     }
 }
 
-
 @ExperimentalAnimationApi
 @Composable
 fun TickView() {
@@ -247,7 +258,8 @@ fun TickView() {
 
         var currentNr by remember { mutableStateOf(0) }
 
-        Text("Number: $currentNr",
+        Text(
+            "Number: $currentNr",
             Modifier
                 .background(Color.Blue)
                 .fillMaxWidth()
@@ -259,12 +271,9 @@ fun TickView() {
                     }
                 }
                 .width(200.dp)
-                .height(50.dp))
+                .height(50.dp)
+        )
 
         TickBox(boxState = TickState.fromInt(currentNr))
-
-
     }
 }
-
-

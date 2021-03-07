@@ -25,7 +25,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import com.example.androiddevchallenge.ui.CountDownScreen
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
-
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { MainViewModelFactory(baseContext) }
@@ -34,13 +33,11 @@ class MainActivity : AppCompatActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
-        //show content behind status bar
+        // show content behind status bar
         window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        //make status bar transparent
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        // make status bar transparent
         window?.statusBarColor = Color.TRANSPARENT
-
 
         super.onCreate(savedInstanceState)
         setContent {
@@ -48,6 +45,5 @@ class MainActivity : AppCompatActivity() {
                 CountDownScreen(viewModel)
             }
         }
-
     }
 }

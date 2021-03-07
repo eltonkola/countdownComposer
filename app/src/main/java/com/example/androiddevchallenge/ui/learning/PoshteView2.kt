@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui.learning
 
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -44,7 +59,6 @@ fun PoshteView2(time: Int) {
             .fillMaxHeight()
     ) {
 
-
         val infiniteTransition = rememberInfiniteTransition()
 //        val color by infiniteTransition.animateColor(
 //            initialValue = Color.Red,
@@ -55,7 +69,6 @@ fun PoshteView2(time: Int) {
 //            )
 //        )
 
-
         var strated by remember { mutableStateOf(true) }
 
         val prev = if (time == 0) {
@@ -64,7 +77,8 @@ fun PoshteView2(time: Int) {
             time - 1
         }
 
-        Text("ShowHide",
+        Text(
+            "ShowHide",
             Modifier
                 .background(Color.Blue)
                 .fillMaxWidth()
@@ -72,8 +86,8 @@ fun PoshteView2(time: Int) {
                     strated = !strated
                 }
                 .width(200.dp)
-                .height(50.dp))
-
+                .height(50.dp)
+        )
 
         val rotationX1 by animateFloatAsState(
             targetValue = if (strated) 0f else -90f,
@@ -93,15 +107,12 @@ fun PoshteView2(time: Int) {
             ),
         )
 
-
-
         Box(
             Modifier
                 .width(200.dp)
                 .height(200.dp)
                 .padding(20.dp)
         ) {
-
 
             Box(
                 Modifier
@@ -111,7 +122,6 @@ fun PoshteView2(time: Int) {
                         rotationX = rotationX2,
                         //   clip = true,
                         //  transformOrigin = TransformOrigin.Center.copy(1f, 1f)
-
 
                     )
                     .background(Color.Green),
@@ -135,7 +145,6 @@ fun PoshteView2(time: Int) {
                         //  clip = true,
                         //     transformOrigin = TransformOrigin.Center.copy(1f, 1f)
 
-
                     )
                     .background(Color.Red),
                 contentAlignment = Alignment.Center
@@ -148,14 +157,9 @@ fun PoshteView2(time: Int) {
                     textAlign = TextAlign.Center,
                 )
             }
-
-
         }
-
-
     }
 }
-
 
 @ExperimentalAnimationApi
 @Preview("Light Theme", widthDp = 360, heightDp = 640)

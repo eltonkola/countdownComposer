@@ -1,5 +1,19 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui
-
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
@@ -28,7 +42,6 @@ fun TimerItemView(time: Int, title: String) {
 
         Row() {
 
-
 //            Crossfade(time,
 //                animationSpec = spring(stiffness = 50f) //snap(delayMillis = 50) // tween(durationMillis = 300),
 //            ) {
@@ -48,17 +61,12 @@ fun TimerItemView(time: Int, title: String) {
                 time / 100
             } else 0
 
-
-
             if (res2 > 0) {
                 TickBox(boxState = TickState.fromInt(res2))
             }
             TickBox(boxState = TickState.fromInt(res1))
             TickBox(boxState = TickState.fromInt(res0))
-
-
         }
-
 
         Text(
             text = title,
@@ -68,7 +76,6 @@ fun TimerItemView(time: Int, title: String) {
             textAlign = TextAlign.Center,
         )
     }
-
 }
 
 @ExperimentalAnimationApi

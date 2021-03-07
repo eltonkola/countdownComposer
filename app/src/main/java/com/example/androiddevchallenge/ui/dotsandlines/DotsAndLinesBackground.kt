@@ -1,23 +1,49 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui.dotsandlines
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
 import com.example.androiddevchallenge.ui.dotsandlines.Dot.Companion.distanceTo
 import com.example.androiddevchallenge.ui.dotsandlines.DotsAndLinesState.Companion.create
 import com.example.androiddevchallenge.ui.dotsandlines.DotsAndLinesState.Companion.next
 import com.example.androiddevchallenge.ui.dotsandlines.DotsAndLinesState.Companion.populationControl
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 @Composable
 fun AnimatedBackground(
-    modifier: Modifier, contentColor: Color = Color.White,
+    modifier: Modifier,
+    contentColor: Color = Color.White,
     threshold: Float = 0.06f,
     maxThickness: Float = 6f,
     dotRadius: Float = 6f,
@@ -36,7 +62,8 @@ fun AnimatedBackground(
     setDotsAndLinesState { it.copy(speed = speed, dotRadius = dotRadius) }
     setDotsAndLinesState { it.populationControl(populationFactor) }
 
-    Canvas(modifier = modifier.fillMaxSize(),
+    Canvas(
+        modifier = modifier.fillMaxSize(),
 
         onDraw = {
 
@@ -69,9 +96,8 @@ fun AnimatedBackground(
                     )
                 }
             }
-
-
-        })
+        }
+    )
 }
 
 fun <T> List<T>.nestedForEach(block: (T, T) -> Unit) {
@@ -81,7 +107,6 @@ fun <T> List<T>.nestedForEach(block: (T, T) -> Unit) {
         }
     }
 }
-
 
 class DotsAndLinesStateHolder(
     private val coroutineScope: CoroutineScope
@@ -127,5 +152,4 @@ class DotsAndLinesStateHolder(
             }
         }
     }
-
 }

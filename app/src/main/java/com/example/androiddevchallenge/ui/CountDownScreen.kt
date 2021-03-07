@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.ui
 
 import androidx.compose.animation.Animatable
@@ -51,7 +66,6 @@ import nl.dionsegijn.konfetti.ParticleSystem
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.SizeZ
 
-
 val secColors = listOf(
     "#bc0020", "#f91f86", "#f60d07", "#a40052",
     "#f32f18", "#bc1a65", "#ff3123", "#e84c89",
@@ -70,8 +84,7 @@ val secColors = listOf(
     "#d2002c", "#c73e46", "#ff5d51", "#ff5359"
 ).map { it.hexToColor() }
 
-
-//val colorz = listOf("#791650"    ,"#841B58"    ,"#8F1F60"
+// val colorz = listOf("#791650"    ,"#841B58"    ,"#8F1F60"
 //    ,"#9A2467"    ,"#A5286F"    ,"#B02D77"    ,"#BC317F"
 //    ,"#C73687"    ,"#D23A8F"    ,"#DD3F96"    ,"#E8439E"
 //    ,"#F348A6"    ,"#F348A6"    ,"#E3429D"    ,"#D33B93"
@@ -81,10 +94,10 @@ val secColors = listOf(
 //    ,"#510743"    ,"#560945"    ,"#5B0B46"    ,"#600D48"
 //    ,"#650F49"    ,"#6A114B"    ,"#6F124D"    ,"#74144E" ,"#791650")
 
-//val secColors = mutableListOf<String>().apply{
+// val secColors = mutableListOf<String>().apply{
 //    addAll(colorz)
 //    addAll(colorz.reversed())
-//}.map { it.hexToColor() }
+// }.map { it.hexToColor() }
 
 fun String.hexToColor(): Color {
     return Color(android.graphics.Color.parseColor(this))
@@ -102,13 +115,13 @@ fun CountDownScreen(model: MainViewModel) {
     )
 
     val backgroundBias by animateFloatAsState(
-            targetValue = if (model.remaining.seconds > 30) {
-                model.remaining.seconds.toFloat() / 100 - 0.7f
-            } else {
-                (60 - model.remaining.seconds.toFloat()) / 100 - 0.7f
-            },
-            animationSpec = tween(1000, easing = LinearEasing)
-        )
+        targetValue = if (model.remaining.seconds > 30) {
+            model.remaining.seconds.toFloat() / 100 - 0.7f
+        } else {
+            (60 - model.remaining.seconds.toFloat()) / 100 - 0.7f
+        },
+        animationSpec = tween(1000, easing = LinearEasing)
+    )
 
     Image(
         painter = painterResource(id = R.drawable.background),
@@ -116,11 +129,11 @@ fun CountDownScreen(model: MainViewModel) {
         contentScale = ContentScale.Crop,
         modifier = Modifier.fillMaxSize(),
 
-        alignment = BiasAlignment(backgroundBias, 0f) //(model.remaining.seconds / 3000f), 0f)
+        alignment = BiasAlignment(backgroundBias, 0f) // (model.remaining.seconds / 3000f), 0f)
 
     )
 
-    //we can animate all the other values if we need to
+    // we can animate all the other values if we need to
     AnimatedBackground(
         modifier = Modifier.alpha(0.6f),
         populationFactor = if (model.remaining.seconds > 30) {
@@ -130,7 +143,6 @@ fun CountDownScreen(model: MainViewModel) {
         }
     )
 
-
     ConstraintLayout(
         modifier = Modifier
             .fillMaxHeight()
@@ -138,17 +150,18 @@ fun CountDownScreen(model: MainViewModel) {
     ) {
         val (topBar, card, bars, targetDate) = createRefs()
 
-        Box(modifier = Modifier
-            .constrainAs(targetDate) {
-                bottom.linkTo(parent.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            }
-            .padding(20.dp)
-            .shadow(
-                elevation = 6.dp,
-                shape = RoundedCornerShape(8.dp)
-            )
+        Box(
+            modifier = Modifier
+                .constrainAs(targetDate) {
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .padding(20.dp)
+                .shadow(
+                    elevation = 6.dp,
+                    shape = RoundedCornerShape(8.dp)
+                )
 
         ) {
             Text(
@@ -162,7 +175,8 @@ fun CountDownScreen(model: MainViewModel) {
             )
         }
 
-        AppBarScreen(model,
+        AppBarScreen(
+            model,
             modifier = Modifier
                 .constrainAs(topBar) {
                     top.linkTo(parent.top)
@@ -170,7 +184,6 @@ fun CountDownScreen(model: MainViewModel) {
                     end.linkTo(parent.end)
                 }
         )
-
 
         val color = remember { Animatable(Color.Red) }
 
@@ -183,14 +196,16 @@ fun CountDownScreen(model: MainViewModel) {
         val spaceBetweenBars = 32.dp
         val barWidth = 46.dp
         val barPadding = 0.dp
-        Row(modifier = Modifier
-            .padding(bottom = 6.dp)
-            .constrainAs(bars) {
-                // top.linkTo(topBar.top, margin = 10.dp)
-                start.linkTo(card.start)
-                end.linkTo(card.end)
-                bottom.linkTo(card.top)
-            }) {
+        Row(
+            modifier = Modifier
+                .padding(bottom = 6.dp)
+                .constrainAs(bars) {
+                    // top.linkTo(topBar.top, margin = 10.dp)
+                    start.linkTo(card.start)
+                    end.linkTo(card.end)
+                    bottom.linkTo(card.top)
+                }
+        ) {
 
             VerticalProgress(
                 modifier = Modifier
@@ -232,8 +247,7 @@ fun CountDownScreen(model: MainViewModel) {
             )
         }
 
-
-        //val alpha: Float by animateFloatAsState(if (model.remaining.seconds % 2 == 0) 0.9f else 0.8f)
+        // val alpha: Float by animateFloatAsState(if (model.remaining.seconds % 2 == 0) 0.9f else 0.8f)
 
         val translationX by animateFloatAsState(
             targetValue = if (model.remaining.seconds % 2 == 0) 6f else -6f,
@@ -241,7 +255,7 @@ fun CountDownScreen(model: MainViewModel) {
                 animation = tween(
                     durationMillis = 2000,
                     easing = FastOutSlowInEasing
-                ),//tween(durationMillis = 2000),
+                ), // tween(durationMillis = 2000),
                 repeatMode = RepeatMode.Reverse
             )
         )
@@ -252,11 +266,10 @@ fun CountDownScreen(model: MainViewModel) {
                 animation = tween(
                     durationMillis = 2000,
                     easing = FastOutSlowInEasing
-                ),//tween(durationMillis = 2000),
+                ), // tween(durationMillis = 2000),
                 repeatMode = RepeatMode.Reverse
             )
         )
-
 
         val translationZ by animateFloatAsState(
             targetValue = if (model.remaining.seconds % 1 == 0) 1f else -1f,
@@ -264,11 +277,10 @@ fun CountDownScreen(model: MainViewModel) {
                 animation = tween(
                     durationMillis = 2000,
                     easing = FastOutSlowInEasing
-                ),//tween(durationMillis = 2000),
+                ), // tween(durationMillis = 2000),
                 repeatMode = RepeatMode.Reverse
             )
         )
-
 
         Row(
             modifier = Modifier
@@ -281,7 +293,6 @@ fun CountDownScreen(model: MainViewModel) {
                 },
             horizontalArrangement = Arrangement.Center
         ) {
-
 
             Card(
                 modifier = Modifier
@@ -300,7 +311,6 @@ fun CountDownScreen(model: MainViewModel) {
                 elevation = 10.dp
 
             ) {
-
 
                 Row(modifier = Modifier.padding(16.dp)) {
 
@@ -326,19 +336,14 @@ fun CountDownScreen(model: MainViewModel) {
                     )
 
                     TimerItemView(model.remaining.seconds, "SECONDS")
-
-
                 }
             }
-
-
         }
-
     }
 
     var confettiConfig by remember { mutableStateOf(ParticleSystem()) }
 
-    if(model.celebrate){
+    if (model.celebrate) {
         confettiConfig = ParticleSystem()
             .addColors(listOf(Color.Yellow, Color.Green, Color.Magenta))
             .setDirection(0.0, 359.0)
@@ -356,9 +361,7 @@ fun CountDownScreen(model: MainViewModel) {
         modifier = Modifier.fillMaxSize(),
         config = confettiConfig
     )
-
 }
-
 
 @ExperimentalAnimationApi
 @Preview(widthDp = 360, heightDp = 640)
@@ -368,4 +371,3 @@ fun LightPreview() {
         CountDownScreen(MainViewModel(PrefRepo(LocalContext.current)))
     }
 }
-
