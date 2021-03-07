@@ -1,5 +1,4 @@
-# Put title of your app here
-countdownComposer
+# countdownComposer
 ![Workflow result](https://github.com/eltonkola/countdownComposer/workflows/Check/badge.svg)
 
 ## :scroll: Description
